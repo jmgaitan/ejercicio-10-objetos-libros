@@ -1,0 +1,130 @@
+Desarrollar todos los puntos utilizando:
+- Constructores de variables let y const
+- Template strings
+
+No utilizar:
+- Constructor de variables var
+- Concatenaciones
+
+----------------
+
+Parte 1:
+
+1 - Crear dentro de la carpeta "parte-1" un archivo index.html e incluir en él el llamado a un archivo de JavaScript externo.
+
+
+2 - En el archivo de JS externo crear un constructor de objetos Libro que reciba titulo y autor como parámetros y utilice dichos valores para cargarlos en propiedades con los mismos nombres, para poder crear un libro de la siguiente manera:
+let unLibro = new Libro('Ángeles y Demonios', 'Dan Brown')
+
+Si esto está bien hecho, al ejecutar console.log(unLibro) el intérprete de JavaScript debería mostrar esta información:
+Libro {autor: "Dan Brown", titulo: "Ángeles y Demonios"}.
+
+
+3 - Agregar en Libro el método mostrarDatosEnConsola() que imprima directamente en la consola el nombre del libro y el autor al que pertenece, de tal modo que al ejecutar:
+unLibro.mostrarDatosEnConsola()
+en la consola se visualice la siguiente oración, con este formato exacto (sin comillas):
+"Ángeles y Demonios, de DAN BROWN"
+
+
+4 - Agregar en Libro el método mostrarDatosEnAlert() que, al ser llamado, muestre en una ventanita alert el mismo string que en el punto anterior.
+
+Si esto está bien hecho, el siguiente código debería mostrar el texto indicado en una ventanita alert:
+unLibro.mostrarDatosEnAlert()
+
+Tener en cuenta que los puntos 3 y 4 tienen el mismo texto de salida. Evitar repetir código. Es decir que, si en lugar de mostrar este texto al llamar a ambas funciones:
+"Ángeles y Demonios, de DAN BROWN",
+se decidiera cambiar el texto generado a este formato:
+"Título: Ángeles y Demonios. - Autor: Dan Brown",
+la modificación debería efectuarse en un único lugar, y no en ambas funciones.
+
+
+5 - Agregar en Libro el método getTitulo() que retorne el título del libro.
+
+Si esto está bien hecho, el siguiente código no debería mostrarle nada al visitante ni en el DOM, consola, ni ningún otro lado:
+let nuevolibro = new Libro('Fuego y Sangre', 'George R. R. Martin');
+let tituloDelNuevoLibro = nuevolibro.getTitulo();
+
+Sin embargo, al agregarle la siguiente línea debería mostrar en una ventanita alert el título 'Fuego y Sangre':
+alert(tituloDelNuevoLibro);
+
+
+6: Agregar en Libro un método mostrarDatos(), que reciba un parámetro, que logre los siguientes resultados:
+mostrarDatos('alert')   // Imprime "Fuego y Sangre, de GEORGE R. R. MARTIN" en una vantanita alert
+mostrarDatos('console') // Imprime "Fuego y Sangre, de GEORGE R. R. MARTIN" en la consola
+mostrarDatos()          // Imprime "Fuego y Sangre, de GEORGE R. R. MARTIN" en la consola
+No repetir código.
+
+
+----------------
+
+Parte 2:
+
+Copiar de la parte 1 el constructor Libro del archivo JS. Cerrar el proyecto anterior para evitar confusiones y abrir la carpeta con la 2da parte en VSCode. Abrir el HTML directamente en el browser, con y sin Live Server, para ver cómo se comporta.
+
+
+7 - Pegar en el JS el constructor Libro de la parte anterior. Modificar el constructor Libro para que reciba todos estos parámetros:
+titulo, autor, precio, isbn, paginas, idioma, foto, sinopsis.
+
+
+8 - Utilizar los parámetros recibidos para asignárselos a propiedades del objeto que tengan el mismo nombre.
+
+
+9 - Crear un nuevo objeto con esta información de prueba:
+let libro1 = new Libro(
+  'Carrie',
+  'Stephen King',
+  '$2.399',
+  '9789871138999',
+  '256',
+  'Español',
+  'foto.jpg',
+  'El legendario debut de Stephen King, sobre una marginada adolescente y la venganza que ejerce sobre sus compañeros de clase.'
+)
+
+Visualizar en la consola si el objeto quedó bien construido, probando acceder a sus propiedades.
+
+
+10 - Crear en el constructor Libro el método getHtmlArticle() que retorne el HTML (un string) correspondiente a un <article> como los de prueba que están dentro del <section id="libros"> del HTML (En la carpeta img existe el archivo "foto.jpg" para utilizar para este objeto de prueba.), pero utilizando los valores almacenados en sus propias propiedades para generar el contenido HTML.
+
+
+11 - De forma dinámica, agregar al contenido existente en el <section> del DOM el contenido generado por getHtmlArticle() del objeto libro1 creado en el punto 9.
+
+Si esto funciona adecuadamente en el browser deberían ahora figurar otro libro después de los dos ya existentes en el código HTML original.
+
+
+12 - Instanciar 4 objetos Libro para crear 4 libros a partir de los datos de libros reales comentados en el archivo JS.
+
+
+13 - Lograr que el siguiente código muestre todos los libros (existentes en el HTML + los generados de forma dinámica) en el <section> ubicado en el HTML:
+  let htmlNuevosLibros = libro1.getHtmlArticle()
+                       + libro2.getHtmlArticle()
+                       + libro3.getHtmlArticle()
+                       + libro4.getHtmlArticle()
+  elemLibrosContainer.innerHTML += htmlNuevosLibros
+
+
+14 - Eliminar todos los <article> que están de prueba en el <section> del HTML, dejando solo el <h1> existente.
+
+Si todo funciona adecuadamente, JS debería cargar el <section> con todos los libros instanciados a partir del constructor Libro.
+
+
+15 - Éxitos! 😄
+
+
+
+----------------
+
+## DESAFÍO ##
+
+Parte 3:
+
+16 - Con todo lo anterior, lograr que el siguiente código funcione:
+let id_destino = 'libros';
+// ... código ...
+let libros = [libro1, libro2, libro3, libro4];
+let libreria = new Libreria(libros);
+libreria.cargarElementoConLibros(id_destino);
+
+17 - Si eso funciona, se puede acortar a:
+// ... código ...
+(new Libreria([libro1, libro2, libro3, libro4])).cargarElementoConLibros('libros');
